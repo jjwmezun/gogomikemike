@@ -1,18 +1,18 @@
 <?php
 
 	$random_img_list = null;
-	
+
 	function gomike_current_year()
-	{		
+	{
 		date_default_timezone_set( 'UTC' );
 		echo date( 'Y' );
 	};
-	
+
 	function gomike_list_rand_index( $list, $start_limit = 0, $end_limit = 0 )
 	{
 		return rand( 0 + $start_limit, sizeof( $list ) - ( 1 + $end_limit ) );
 	}
-	
+
 	function gomike_list_rand( $list, $start_limit = 0, $end_limit = 0 )
 	{
         return $list[ gomike_list_rand_index( $list, $start_limit, $end_limit ) ];
@@ -31,77 +31,77 @@
 	function gomike_html_title()
 	{
 		echo '<title>';
-		
+
 			if ( !is_home() )
 			{
 				echo get_the_title() . ' | ';
 			}
-			
+
 			echo get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' );
-		
+
 		echo '</title>';
 	};
-	
+
     function register_main_style()
     {
         wp_register_style( 'main_css', get_template_directory_uri() . '/style.css' );
         wp_enqueue_style( 'main_css' );
     };
-    
+
     function register_main_css()
     {
         add_action( 'wp_enqueue_scripts', 'register_main_style' );
     };
-	
+
     function register_main_script()
     {
-        wp_register_script( 'main_script', get_template_directory_uri() . '/script.js' );
-        wp_enqueue_script( 'main_script' );
+        wp_register_script( 'main', get_template_directory_uri() . '/script.js?m=20180930' );
+        wp_enqueue_script( 'main' );
     };
-    
+
     function register_main_js()
     {
-        add_action( 'wp_enqueue_scripts', 'register_main_script' );
+        add_action( 'wp_footer', 'register_main_script' );
     };
-	
+
 	function gomike_body_class()
 	{
 		global $post;
 		$class_template = 'gomike-body';
 		$class = $class_template;
 		$class .= ' ' . $class_template . '-' . $post->post_name;
-		
+
 		if ( is_home() )
 			$class .= ' ' . $class_template . '-home';
-		
+
 		echo 'class="' . $class . '"';
 	};
-	
+
 	function gomike_post_class()
 	{
 		echo 'class="gomike-post"';
 	};
-	
+
 	function gomike_print_meta( $key, $post_id = null, $single = true )
 	{
 		echo gomike_get_meta( $key, $post_id, $single );
 	}
-		
+
 	function gomike_get_meta( $key, $post_id = null, $single = true )
 	{
-		
+
 		if ( !$post_id )
 		{
 			$post_id = get_the_ID();
 		}
-		
+
 		return get_post_meta( $post_id, $key, $single );
 	};
-	
+
 	function gomike_oldest_post_link()
 	{
 		$posts = get_posts( array( 'posts_per_page' => 1, 'order' => 'ASC' ) );
-	
+
 		foreach( $posts as $p )
 		{
 			if ( $p->ID != get_the_ID() )
@@ -110,21 +110,21 @@
 			}
 		}
 	};
-	
+
 	function gomike_older_post_link()
 	{
 		previous_post_link( gomike_make_class( 'gomike-single-post-sequence-list-item', 'older', 'li' ) . '%link</li>', '&lsaquo; %title' );
 	};
-	
+
 	function gomike_newer_post_link()
 	{
 		next_post_link( gomike_make_class( 'gomike-single-post-sequence-list-item', 'newer', 'li' ) . '%link</li>', '%title &rsaquo;' );
 	};
-	
+
 	function gomike_newest_post_link()
 	{
 		$posts = get_posts( array( 'posts_per_page' => 1, 'order' => 'DESC' ) );
-	
+
 		foreach( $posts as $p )
 		{
 			if ( $p->ID != get_the_ID() )
@@ -133,7 +133,7 @@
 			}
 		}
 	};
-	
+
 	function gomike_single_post_sequence( $type = 'top' )
 	{
 		if ( is_single() )
@@ -148,17 +148,17 @@
 			echo '</nav> <!-- POST_SEQUENCE_NAV -->';
 		}
 	};
-	
+
 	function gomike_single_post_sequence_top()
 	{
 		gomike_single_post_sequence( 'top' );
 	};
-	
+
 	function gomike_single_post_sequence_bottom()
 	{
 		gomike_single_post_sequence( 'bottom' );
 	};
-	
+
 	function gomike_older_posts_link()
 	{
 		if ( get_next_posts_link() )
@@ -168,7 +168,7 @@
 			echo '</li>';
 		}
 	};
-	
+
 	function gomike_newer_posts_link()
 	{
 		if ( get_previous_posts_link() )
@@ -178,9 +178,9 @@
 			echo '</li>';
 		}
 	};
-	
+
 	function gomike_group_posts_sequence( $type = 'top' )
-	{		
+	{
 		echo '<nav class="gomike-group-posts-sequence-nav gomike-group-posts-sequence-nav' . $type . '">';
 			echo '<ul class="gomike-group-posts-sequence-list">';
 				gomike_older_posts_link();
@@ -188,81 +188,81 @@
 			echo '</ul>';
 		echo '</nav>';
 	}
-	
+
 	function gomike_group_posts_sequence_top()
 	{
 		gomike_group_posts_sequence( 'top' );
 	};
-	
+
 	function gomike_group_posts_sequence_bottom()
 	{
 		gomike_group_posts_sequence( 'bottom' );
 	};
-	
+
 	function gomike_make_class( $base_class, $specific_class = null, $element = null )
 	{
 		$string = '';
-		
+
 		if ( $element )
 		{
 			$string = '<' . $element . ' ';
 		}
-		
+
 		$string .= 'class="' . $base_class;
-		
+
 		if ( $specific_class )
 		{
 			$string .= ' ' . $base_class . '-' . $specific_class;
 		}
-		
+
 		$string .= '"';
-		
+
 		if ( $element )
 		{
 			$string .= '>';
 		}
-		
+
 		return $string;
 	};
-	
-	
+
+
 	function gomike_print_class( $base_class, $specific_class = null, $element = null )
 	{
 		echo gomike_make_class( $base_class, $specific_class, $element );
 	}
-	
+
 	function gomike_main_nav()
 	{
 		$page_list = get_pages();
 		$link_class = 'gomike-main-nav-list-item';
-		
+
 		echo '<nav class="gomike-main-nav">';
 			echo '<ul class="gomike-main-nav-list">';
-			
+
 				gomike_print_class( $link_class, 'home', 'li' );
 					echo '<a ' . gomike_make_class( 'gomike-main-nav-list-link', 'home' ) . ' href="' . home_url() . '">Home</a>';
 				echo '</li>';
-			
+
 				foreach ( $page_list as $page )
 				{
 					gomike_print_class( $link_class, $page->post_name, 'li' );
 						echo '<a ' . gomike_make_class( 'gomike-main-nav-list-link', $page->post_name ) . ' href="' . get_permalink( $page->ID ) . '">' . $page->post_title . '</a>';
 					echo '</li>';
 				}
-				
+
 				$rand_post = get_posts( 'orderby=rand&posts_per_page=1' );
-				
+
 				foreach ( $rand_post as $r )
 				{
 					gomike_print_class( $link_class, 'random-story', 'li' );
 						echo '<a ' . gomike_make_class( 'gomike-main-nav-list-link', 'random-story' ) . ' href="' . get_permalink( $r->ID ) . '">Random Story</a>';
 					echo '</li>';
 				}
-			
+
 			echo '</ul>';
 		echo '</nav> <!-- MAIN_NAV -->';
 	};
-	
+
 	function gomike_search()
 	{
 		echo '<div class="gomike-search">';
@@ -273,17 +273,17 @@
 		echo '</form>';
 		echo '</div> <!-- SEARCH -->';
 	};
-	
+
 	function gomike_main_content_class()
 	{
 		global $post;
 		$class_template = 'gomike-main-content';
 		$class = $class_template;
 		$class .= ' ' . $class_template . '-' . $post->post_name;
-		
+
 		echo 'class="' . $class . '"';
 	};
-	
+
 	function gomike_story_list()
 	{
 		$post_list = get_posts
@@ -306,44 +306,52 @@
 		}
 		echo '</ul> <!-- STORY_LIST -->';
 	};
-	
+
 	function gomike_random_img()
 	{
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
-		
+
 		global $wpdb;
 		global $random_img_list;
-		
+
 		if ( !$random_img_list )
 		{
 			$random_img_list = $wpdb->get_results( "SELECT * FROM gomike_img" );
 		}
-		
+
 		$rand_index = gomike_list_rand_index( $random_img_list );
 		$rand_img = $random_img_list[ $rand_index ];
 		unset( $random_img_list[ $rand_index ] );
 		$random_img_list = array_values( $random_img_list );
-		
+
 		$img_class = 'gomike-image';
-		
+
 		if ( $rand_img->img_border == 0 )
 		{
 			$img_class .= ' gomike-image-borderless';
 		}
-		
+
 		//gomike_print_class( 'gomike-image-frame', null, 'div' );
 		echo '<div class="gomike-image-frame" width="' . $rand_img->img_width . '">';
 			echo '<img class="' . $img_class . '" src="' . gomike_get_upload( 'rand-img/' . $rand_img->img_filename ) . '" width="' . $rand_img->img_width . '" height="' . $rand_img->img_height . '" alt="" />';
-			
+
 			if( $rand_img->img_credit )
 			{
 				echo '<div class="gomike-image-credit" style="width:' . $rand_img->img_width . 'px;">';
 					echo '<p>' . $rand_img->img_credit . '</p>';
 				echo '</div> <!-- IMAGE_CREDIT -->';
 			}
-			
+
 		echo '</div> <!-- IMAGE_FRAME -->';
 	};
-	
+
+	function remove_jquery()
+	{
+		wp_dequeue_script( 'jquery' );
+		wp_deregister_script( 'jquery' );
+	}
+	add_action( 'wp_enqueue_scripts', 'remove_jquery' );
+
 	register_main_css();
+	register_main_js();
