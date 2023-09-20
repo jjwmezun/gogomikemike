@@ -1,5 +1,7 @@
 <?php
 
+require_once( 'vendor/autoload.php' );
+
 $random_img_list = null;
 
 function gomike_current_year()
@@ -28,26 +30,33 @@ function gomike_date_format()
 	return 'Y M j';
 };
 
-function register_main_style()
+function gomike_register_main_style()
 {
-	wp_register_style( 'main_css', get_template_directory_uri() . '/style.css' );
+	wp_register_style( 'main_css', get_template_directory_uri() . '/assets/dist/index.css' );
 	wp_enqueue_style( 'main_css' );
 };
 
+function gomike_register_admin_style()
+{
+	wp_register_style( 'admin_css', get_template_directory_uri() . '/assets/dist/admin.css' );
+	wp_enqueue_style( 'admin_css' );
+}
+
 function register_main_css()
 {
-	add_action( 'wp_enqueue_scripts', 'register_main_style' );
+	add_action( 'wp_enqueue_scripts', 'gomike_register_main_style' );
+	add_action( 'admin_enqueue_scripts', 'gomike_register_admin_style' );
 };
 
-function register_main_script()
+function gomike_register_main_script()
 {
-	wp_register_script( 'main', get_template_directory_uri() . '/script.js?m=20180930' );
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/dist/index.js' );
 	wp_enqueue_script( 'main' );
 };
 
 function register_main_js()
 {
-	add_action( 'wp_footer', 'register_main_script' );
+	add_action( 'wp_footer', 'gomike_register_main_script' );
 };
 
 function gomike_body_class()
@@ -55,7 +64,11 @@ function gomike_body_class()
 	global $post;
 	$class_template = 'gomike-body';
 	$class = $class_template;
-	$class .= ' ' . $class_template . '-' . $post->post_name;
+
+	if ( !empty( $post ) )
+	{
+		$class .= ' ' . $class_template . '-' . $post->post_name;
+	}
 
 	if ( is_home() )
 		$class .= ' ' . $class_template . '-home';
@@ -251,13 +264,16 @@ function gomike_main_nav()
 
 function gomike_search()
 {
-	echo '<div class="gomike-search">';
-	echo '<form method="get" id="searchform" action="'; bloginfo('home');
-	echo '/">';
-		echo '<input type="text" name="s" class="gomike-search-bar" id="gomike-search-bar" />';
-		echo '<input type="submit" id="gomike-search-submit" value="Search" class="btn gomike-search-submit" />';
-	echo '</form>';
-	echo '</div> <!-- SEARCH -->';
+	?>
+	<!-- SEARCH -->
+		<div class="gomike-search">
+			<form method="get" id="searchform" action="/">
+				<input type="text" name="s" class="gomike-search-bar" id="gomike-search-bar" />
+				<input type="submit" id="gomike-search-submit" value="Search" class="btn gomike-search-submit" />
+			</form>
+		</div>
+	<!-- SEARCH -->
+	<?php
 };
 
 function gomike_main_content_class()
@@ -265,7 +281,11 @@ function gomike_main_content_class()
 	global $post;
 	$class_template = 'gomike-main-content';
 	$class = $class_template;
-	$class .= ' ' . $class_template . '-' . $post->post_name;
+
+	if ( !empty( $post ) )
+	{
+		$class .= ' ' . $class_template . '-' . $post->post_name;
+	}
 
 	echo 'class="' . $class . '"';
 };
@@ -337,6 +357,7 @@ function remove_jquery()
 	wp_dequeue_script( 'jquery' );
 	wp_deregister_script( 'jquery' );
 }
+
 add_action( 'wp_enqueue_scripts', 'remove_jquery' );
 
 // Turn on thumbnails.
@@ -347,3 +368,13 @@ add_theme_support( 'title-tag' );
 
 register_main_css();
 register_main_js();
+
+use Mezun\GoGoMikeMike\WPMetaBox;
+new WPMetaBox
+(
+	'prompt',
+	'Prompt',
+	[
+		'post-type' => [ 'post' ]
+	]
+);

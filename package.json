@@ -1,18 +1,13 @@
 {
-	"name"    : "mikegrunts",
-	"version" : "0.1.0",
+	"name"    : "gogomikemike",
+	"version" : "2.0.0",
 	"author"  : "J. J. W. Mezun",
-	"private" : "true",
-	
-	"devDependencies" :
-	{
-		"grunt"                : "~0.4.0",
-        "grunt-contrib-cssmin" : "*",
-        "grunt-contrib-sass"   : "*",
-        "grunt-contrib-uglify" : "*",
-        "grunt-contrib-watch"  : "*",
-        "grunt-cssc"           : "*",
-        "grunt-htmlhint"       : "*",
-        "matchdep"             : "*"
+	"license": "GPL-3.0-or-later",
+	"scripts": {
+	  "sass": "sass -w --style=compressed assets/sass/style.scss assets/dist/index.css",
+	  "test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"devDependencies": {
+	  "sass": "^1.56.2"
 	}
 }

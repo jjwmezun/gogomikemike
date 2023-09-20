@@ -8,7 +8,7 @@
 	<body <?php gomike_body_class(); ?>>
 		<header class="gomike-main-header">
 			<h1 class="gomike-main-header-title"><?php bloginfo( 'name' ); ?></h1>
-			<?php include( 'assets/img/microstories-logo.svg' ); ?>
+			<?php include( 'assets/dist/microstories-logo.svg' ); ?>
 			<?php gomike_main_nav(); ?>
 		</header> <!-- MAIN_HEADER -->
 		<?php gomike_search(); ?>
