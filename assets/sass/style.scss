@@ -353,6 +353,17 @@
 		border-bottom: 2px solid #000;
 	}
 
+	.gomike-post-title
+	{
+		margin-bottom: 0.1em;
+	}
+
+	.gomike-post-date
+	{
+		font-size: 0.9em;
+		margin-bottom: 1em;
+	}
+
 	.gomike-post-content
 	{
 		font-weight: 300;
@@ -411,11 +422,8 @@
 		font-size: 1.2em;
 	}
 
-	.gomike-post-created,
 	.gomike-post-prompt,
-	.gomike-post-created p,
-	.gomike-post-prompt p,
-	.gomike-post-ratings
+	.gomike-post-prompt p
 	{
 		text-align: right !important;
 	}

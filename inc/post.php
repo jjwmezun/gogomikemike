@@ -16,6 +16,7 @@
                     <?php the_title(); ?>
                 <?php if ( !is_single() ) { ?></a><?php } ?>
             </h1>
+            <div class="gomike-post-date"><?php the_time( get_option( 'date_format' ) ); ?></div>
 
             <?= gomike_render_image( array_pop( $images ) ); ?>
 
@@ -23,22 +24,12 @@
                 <?php the_content(); ?>
             </div> <!-- POST_CONTENT -->
 
-            <div class="gomike-post-created">
-                <h2 class="gomike-post-subheader gomike-post-subheader-created">Originally Created:</h2>
-                    <p><?php the_time( get_option( 'date_format' ) ); ?></p>
-            </div> <!-- CREATED -->
-
             <?php if ( gomike_get_meta( 'prompt' ) ) { ?>
                 <div class="gomike-post-prompt">
                     <h2 class="gomike-post-subheader gomike-post-subheader-prompt">Prompt:</h2>
                         <p><?php gomike_print_meta( 'prompt' ); ?></p>
                 </div> <!-- PROMPT -->
             <?php } ?>
-
-            <div class="gomike-post-ratings">
-                <h2 class="gomike-post-subheader gomike-post-subheader-ratings">Rating:</h2>
-                <p><?php if(function_exists('the_ratings')) { the_ratings(); } ?></p>
-            </div> <!-- POST_RATINGS -->
 
             <?php gomike_single_post_sequence_bottom(); ?>
 
