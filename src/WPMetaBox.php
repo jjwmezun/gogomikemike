@@ -235,7 +235,7 @@ class WPMetaBox
 		}
 
 		private string $slug;
-		private string $name;
+		private string $title;
         private string $domain;
         private string $priority;
         private string $context;

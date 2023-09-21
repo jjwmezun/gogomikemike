@@ -36,8 +36,6 @@
 		{
 			clear: both;
 		}
-
-		zoom: 1; /* For IE 6/7 (trigger hasLayout) */
 	}
 
 	@mixin justify()
@@ -271,6 +269,8 @@
 	.gomike-main-content
 	{
 		padding: 1em;
+		margin: 0 auto;
+		max-width: 50em;
 
 		p
 		{
@@ -485,6 +485,9 @@
 	.gomike-image-frame
 	{
 		margin: 1em auto;
+		display: grid;
+		grid-template-columns: min-content;
+		justify-content: center;
 	}
 
 	.gomike-image
@@ -492,7 +495,9 @@
 		display: block;
 		margin: 0 auto;
 		border: 2px solid $MAIN1;
-		max-width: 100%;
+		max-width: calc( 100vw - 2em );
+		max-height: 40vh;
+		width: auto;
 		height: auto;
 	}
 
@@ -507,6 +512,8 @@
 		color: $MAINBG;
 		margin: 0 auto;
 		overflow: hidden;
+		justify-self: stretch;
+		width: 100%;
 
 		a:link,
 		a:visited
@@ -526,6 +533,11 @@
 			margin: 0;
 			padding: .25em .5em;
 		}
+	}
+
+	.gomike-image-borderless + .gomike-image-credit
+	{
+		margin-top: 0.5em;
 	}
 
 	.gomike-post-ratings
@@ -618,6 +630,29 @@
 		.gomike-image
 		{
 			border-width: 4px;
+		}
+	}
+
+	@media screen and (min-width: 2000px)
+	{
+		.gomike-main-content
+		{
+			font-size: 250%;
+			padding: 2em;
+		}
+
+		.gomike-post-title a:link,
+		.gomike-post-title a:visited,
+		.gomike-page-title,
+		.gomike-post-title-single,
+		.gomike-image
+		{
+			border-width: 6px;
+		}
+
+		.gomike-main-header
+		{
+			font-size: 125%;
 		}
 	}
 

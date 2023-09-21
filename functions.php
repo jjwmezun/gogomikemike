@@ -313,44 +313,53 @@ function gomike_story_list()
 	echo '</ul> <!-- STORY_LIST -->';
 };
 
-function gomike_random_img()
+function gomike_get_rand_images() : array
 {
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
-
-	global $wpdb;
-	global $random_img_list;
-
-	if ( !$random_img_list )
-	{
-		$random_img_list = $wpdb->get_results( "SELECT * FROM gomike_img" );
-	}
-
-	$rand_index = gomike_list_rand_index( $random_img_list );
-	$rand_img = $random_img_list[ $rand_index ];
-	unset( $random_img_list[ $rand_index ] );
-	$random_img_list = array_values( $random_img_list );
-
-	$img_class = 'gomike-image';
-
-	if ( $rand_img->img_border == 0 )
-	{
-		$img_class .= ' gomike-image-borderless';
-	}
-
-	//gomike_print_class( 'gomike-image-frame', null, 'div' );
-	echo '<div class="gomike-image-frame" width="' . $rand_img->img_width . '">';
-		echo '<img class="' . $img_class . '" src="' . gomike_get_upload( 'rand-img/' . $rand_img->img_filename ) . '" width="' . $rand_img->img_width . '" height="' . $rand_img->img_height . '" alt="" />';
-
-		if( $rand_img->img_credit )
-		{
-			echo '<div class="gomike-image-credit" style="width:' . $rand_img->img_width . 'px;">';
-				echo '<p>' . $rand_img->img_credit . '</p>';
-			echo '</div> <!-- IMAGE_CREDIT -->';
-		}
-
-	echo '</div> <!-- IMAGE_FRAME -->';
+	global $wp_query;
+	return get_posts
+	([
+		'post_type' => 'randimage',
+		'orderby' => 'rand',
+		'numberposts' => $wp_query->found_posts
+	]);
 };
+
+function gomike_render_image( \WP_Post $image ) : void
+{
+	$thumbnailId = get_post_thumbnail_id( $image->ID );
+
+	if ( $thumbnailId === false ) return;
+
+	$thumbnailData = wp_get_attachment_image_src( $thumbnailId, 'full' );
+
+	if ( $thumbnailData === false ) return;
+
+	global $gomikeBorderlessOption;
+	$isBorderless = $gomikeBorderlessOption->getValue( $image->ID );
+
+	$imageClass = 'gomike-image';
+	if ( $isBorderless === 'on' )
+	{
+		$imageClass .= ' gomike-image-borderless';
+	}
+
+	?>
+		<figure class="gomike-image-frame">
+			<img
+				alt=""
+				class="<?= $imageClass; ?>"
+				src="<?= $thumbnailData[ 0 ]; ?>"
+				width="<?= $thumbnailData[ 1 ]; ?>"
+				height="<?= $thumbnailData[ 2 ]; ?>"
+			/>
+			<?php if ( !empty( $image->post_content ) ) : ?>
+				<figcaption class="gomike-image-credit">
+					<?= wp_kses_post( $image->post_content ); ?>
+				</figcaption>
+			<?php endif; ?>
+		</figure>
+	<?php
+}
 
 function remove_jquery()
 {
@@ -366,9 +375,12 @@ add_theme_support( 'post-thumbnails' );
 // Turn on title tag.
 add_theme_support( 'title-tag' );
 
+add_filter( 'big_image_size_threshold', '__return_false' );
+
 register_main_css();
 register_main_js();
 
+// Add prompt post option.
 use Mezun\GoGoMikeMike\WPMetaBox;
 new WPMetaBox
 (
@@ -378,3 +390,32 @@ new WPMetaBox
 		'post-type' => [ 'post' ]
 	]
 );
+
+// Add randimages post type.
+register_post_type
+(
+    'randimage',
+    [
+        'labels' =>
+        [
+            'name' => _x( 'Randimages', 'post-type', 'gogomikemike' ),
+            'singular_name' => _x( 'Randimage', 'post-type', 'gogomikemike' )
+        ],
+        'public' => true,
+        'has_archive' => true,
+        'show_in_rest' => true,
+        'supports' => [ 'editor', 'title', 'thumbnail' ]
+    ]
+);
+
+// Add “¿Is borderless?” option to randimages.
+$gomikeBorderlessOption = new WPMetaBox
+(
+	'borderless',
+	'¿Is borderless?',
+	[
+		'post-type' => [ 'randimage' ],
+		'input-type' => 'checkbox'
+	]
+);
+ 
