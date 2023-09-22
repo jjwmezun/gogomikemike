@@ -4,10 +4,10 @@ require_once( 'vendor/autoload.php' );
 
 $random_img_list = null;
 
-function gomike_current_year()
+function gomike_current_year() : string
 {
 	date_default_timezone_set( 'UTC' );
-	echo date( 'Y' );
+	return strval( date( 'Y' ) );
 };
 
 function gomike_list_rand_index( $list, $start_limit = 0, $end_limit = 0 )
@@ -429,4 +429,3 @@ $gomikeBorderlessOption = new WPMetaBox
 		'input-type' => 'checkbox'
 	]
 );
- 

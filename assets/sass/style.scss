@@ -648,10 +648,12 @@
 
 		a
 		{
+			&,
 			&:link,
 			&:visited
 			{
 				color: $MAIN4;
+				transition: color 0.5s;
 			}
 
 			&:hover
