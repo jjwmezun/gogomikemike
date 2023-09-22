@@ -5,12 +5,15 @@
 		<link rel="canonical" href="<?php echo ( ( is_home() ) ? home_url() : get_permalink( get_the_ID() ) ); ?>">
 		<?php wp_head(); ?>
 	</head>
-	<body <?php gomike_body_class(); ?>>
-		<header class="gomike-main-header">
-			<h1 class="gomike-main-header-title"><?php bloginfo( 'name' ); ?></h1>
-			<?php include( 'assets/dist/microstories-logo.svg' ); ?>
+	<body id="gomike-body" <?php gomike_body_class(); ?>>
+		<header id="gomike-main-header" class="gomike-main-header">
+			<div class="gomike-header-logo">
+				<a aria-label="<?= __( 'Home', 'gogomikemike' ); ?>" class="gomike-header-logo-link" href="/">
+					<?php include( 'assets/dist/microstories-logo.svg' ); ?>
+				</a>
+			</div>
 			<?php gomike_main_nav(); ?>
+			<?php gomike_search(); ?>
 		</header> <!-- MAIN_HEADER -->
-		<?php gomike_search(); ?>
 
 		<section <?php gomike_main_content_class(); ?>>

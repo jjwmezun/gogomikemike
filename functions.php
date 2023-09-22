@@ -238,10 +238,6 @@ function gomike_main_nav()
 	echo '<nav class="gomike-main-nav">';
 		echo '<ul class="gomike-main-nav-list">';
 
-			gomike_print_class( $link_class, 'home', 'li' );
-				echo '<a ' . gomike_make_class( 'gomike-main-nav-list-link', 'home' ) . ' href="' . home_url() . '">Home</a>';
-			echo '</li>';
-
 			foreach ( $page_list as $page )
 			{
 				gomike_print_class( $link_class, $page->post_name, 'li' );
@@ -268,8 +264,22 @@ function gomike_search()
 	<!-- SEARCH -->
 		<div class="gomike-search">
 			<form method="get" id="searchform" action="/">
-				<input type="text" name="s" class="gomike-search-bar" id="gomike-search-bar" />
-				<input type="submit" id="gomike-search-submit" value="Search" class="btn gomike-search-submit" />
+				<div id="gomike-search-input" class="gomike-search-input">
+					<textarea
+						name="s"
+						class="gomike-search-bar"
+						id="gomike-search-bar"
+						placeholder="<?= __( 'Search', 'gogomikemike' ); ?>"
+					></textarea>
+				</div>
+				<div class="gomike-search-submit">
+					<input
+						type="submit"
+						value="<?= __( 'Search', 'gogomikemike' ); ?>"
+						class="gomike-search-submit-input"
+					/>
+					<?php include( 'assets/dist/search.svg' ); ?>
+				</div>
 			</form>
 		</div>
 	<!-- SEARCH -->
@@ -404,7 +414,8 @@ register_post_type
         'public' => true,
         'has_archive' => true,
         'show_in_rest' => true,
-        'supports' => [ 'editor', 'title', 'thumbnail' ]
+        'supports' => [ 'editor', 'title', 'thumbnail' ],
+		'exclude_from_search' => true
     ]
 );
 
