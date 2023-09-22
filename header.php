@@ -6,14 +6,15 @@
 		<?php wp_head(); ?>
 	</head>
 	<body id="gomike-body" <?php gomike_body_class(); ?>>
-		<header id="gomike-main-header" class="gomike-main-header">
-			<div class="gomike-header-logo">
-				<a aria-label="<?= __( 'Home', 'gogomikemike' ); ?>" class="gomike-header-logo-link" href="/">
-					<?php include( 'assets/dist/microstories-logo.svg' ); ?>
-				</a>
-			</div>
-			<?php gomike_main_nav(); ?>
-			<?php gomike_search(); ?>
-		</header> <!-- MAIN_HEADER -->
+		<div>
+			<header id="gomike-main-header" class="gomike-main-header">
+				<div class="gomike-header-logo">
+					<a aria-label="<?= __( 'Home', 'gogomikemike' ); ?>" class="gomike-header-logo-link" href="/">
+						<?php include( 'assets/dist/microstories-logo.svg' ); ?>
+					</a>
+				</div>
+				<?php gomike_main_nav(); ?>
+				<?php gomike_search(); ?>
+			</header> <!-- MAIN_HEADER -->
 
-		<section <?php gomike_main_content_class(); ?>>
+			<main <?php gomike_main_content_class(); ?>>

@@ -1,4 +1,5 @@
-	</section> <!-- MAIN_CONTENT -->
+		</main> <!-- MAIN_CONTENT -->
+	</div>
 
 	<footer class="gomike-footer">
 		<p><?=
