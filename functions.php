@@ -1,5 +1,8 @@
 <?php
 
+use WaughJ\WPUploadImage\WPUploadImage;
+use Mezun\GoGoMikeMike\WPMetaBox;
+
 require_once( 'vendor/autoload.php' );
 
 $random_img_list = null;
@@ -340,10 +343,6 @@ function gomike_render_image( \WP_Post $image ) : void
 
 	if ( $thumbnailId === false ) return;
 
-	$thumbnailData = wp_get_attachment_image_src( $thumbnailId, 'full' );
-
-	if ( $thumbnailData === false ) return;
-
 	global $gomikeBorderlessOption;
 	$isBorderless = $gomikeBorderlessOption->getValue( $image->ID );
 
@@ -353,15 +352,11 @@ function gomike_render_image( \WP_Post $image ) : void
 		$imageClass .= ' gomike-image-borderless';
 	}
 
+	$imageHTML = new WPUploadImage( $thumbnailId, 'responsive', [ 'class' => $imageClass ] );
+
 	?>
 		<figure class="gomike-image-frame">
-			<img
-				alt=""
-				class="<?= $imageClass; ?>"
-				src="<?= $thumbnailData[ 0 ]; ?>"
-				width="<?= $thumbnailData[ 1 ]; ?>"
-				height="<?= $thumbnailData[ 2 ]; ?>"
-			/>
+			<?php $imageHTML->print(); ?>
 			<?php if ( !empty( $image->post_content ) ) : ?>
 				<figcaption class="gomike-image-credit">
 					<?= wp_kses_post( $image->post_content ); ?>
@@ -371,7 +366,13 @@ function gomike_render_image( \WP_Post $image ) : void
 	<?php
 }
 
-function remove_jquery()
+function gomike_remove_block_library() : void
+{
+	wp_dequeue_style( 'wp-block-library' );
+	wp_deregister_style( 'wp-block-library' );
+}
+
+function gomike_remove_jquery() : void
 {
 	wp_dequeue_script( 'jquery' );
 	wp_deregister_script( 'jquery' );
@@ -392,7 +393,8 @@ function gomike_favicons() : void
 	<?php
 }
 
-add_action( 'wp_enqueue_scripts', 'remove_jquery' );
+add_action( 'wp_enqueue_scripts', 'gomike_remove_block_library' );
+add_action( 'wp_enqueue_scripts', 'gomike_remove_jquery' );
 
 // Turn on thumbnails.
 add_theme_support( 'post-thumbnails' );
@@ -406,7 +408,6 @@ register_main_css();
 register_main_js();
 
 // Add prompt post option.
-use Mezun\GoGoMikeMike\WPMetaBox;
 new WPMetaBox
 (
 	'prompt',

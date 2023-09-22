@@ -13,6 +13,7 @@
         }
     ],
     "require": {
-        "waughj/test-hash-item": "^2.0"
+        "waughj/test-hash-item": "^2.0",
+        "waughj/wp-upload-image": "^0.5.3"
     }
 }

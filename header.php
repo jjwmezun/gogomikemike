@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 	<head>
-		<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,900,700' rel='stylesheet' type='text/css'>
 		<link rel="canonical" href="<?php echo ( ( is_home() ) ? home_url() : get_permalink( get_the_ID() ) ); ?>">
 		<?php gomike_favicons(); ?>
 		<?php wp_head(); ?>

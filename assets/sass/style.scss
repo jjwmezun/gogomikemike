@@ -73,6 +73,70 @@
 		word-wrap: normal !important;
 	}
 
+	@function asset_url( $local )
+	{
+		@return url( "/wp-content/themes/gogomikemike/assets/dist/#{ $local }" );
+	}
+
+
+
+
+
+/* =FONTS
+----------------------------------------------*/
+
+@font-face
+{
+    font-family: 'Roboto';
+    src: asset_url('Roboto-Bold.woff2') format('woff2'),
+        asset_url('Roboto-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face
+{
+    font-family: 'Roboto';
+    src: asset_url('Roboto-Regular.woff2') format('woff2'),
+        asset_url('Roboto-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face
+{
+    font-family: 'Roboto';
+    src: asset_url('Roboto-Black.woff2') format('woff2'),
+        asset_url('Roboto-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face
+{
+    font-family: 'Roboto';
+    src: asset_url('Roboto-Light.woff2') format('woff2'),
+        asset_url('Roboto-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face
+{
+    font-family: 'Roboto';
+    src: asset_url('Roboto-LightItalic.woff2') format('woff2'),
+        asset_url('Roboto-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+
 
 
 
@@ -250,7 +314,7 @@
 			text-decoration: none;
 			text-transform: lowercase;
 			font-variant: small-caps;
-			font-weight: bold;
+			font-weight: 700;
 			background: $MAIN4;
 			color: $MAIN1;
 			@include trans();
