@@ -377,6 +377,21 @@ function remove_jquery()
 	wp_deregister_script( 'jquery' );
 }
 
+function gomike_favicons() : void
+{
+	?>
+		<link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/gogomikemike/assets/dist/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/gogomikemike/assets/dist/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/gogomikemike/assets/dist/favicon-16x16.png">
+		<link rel="manifest" href="/wp-content/themes/gogomikemike/assets/dist/site.webmanifest">
+		<link rel="mask-icon" href="/wp-content/themes/gogomikemike/assets/dist/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="/wp-content/themes/gogomikemike/assets/dist/favicon.ico">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="msapplication-config" content="/wp-content/themes/gogomikemike/assets/dist/browserconfig.xml">
+		<meta name="theme-color" content="#ffffff">
+	<?php
+}
+
 add_action( 'wp_enqueue_scripts', 'remove_jquery' );
 
 // Turn on thumbnails.
