@@ -8,6 +8,9 @@
 	</head>
 	<body id="gomike-body" <?php gomike_body_class(); ?>>
 		<div>
+			<div class="skip-to-content-link">
+				<a href="#content"><?= __( 'Skip to Content', 'gogomikemike' ); ?>
+			</div>
 			<header id="gomike-main-header" class="gomike-main-header">
 				<div class="gomike-header-logo">
 					<a aria-label="<?= __( 'Home', 'gogomikemike' ); ?>" class="gomike-header-logo-link" href="/">
@@ -18,4 +21,4 @@
 				<?php gomike_search(); ?>
 			</header> <!-- MAIN_HEADER -->
 
-			<main <?php gomike_main_content_class(); ?>>
+			<main id="content" <?php gomike_main_content_class(); ?>>

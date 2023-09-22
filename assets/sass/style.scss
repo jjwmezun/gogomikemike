@@ -59,6 +59,20 @@
 		transition: all .5s;
 	};
 
+	@mixin screen_reader_text()
+	{
+		border: 0;
+		clip: rect(1px, 1px, 1px, 1px);
+		clip-path: inset(50%);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+		word-wrap: normal !important;
+	}
+
 
 
 
@@ -324,6 +338,11 @@
 			cursor: pointer;
 			padding: 0;
 		}
+	}
+
+	.skip-to-content-link:not( :focus )
+	{
+		@include screen_reader_text();
 	}
 
 
