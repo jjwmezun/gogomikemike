@@ -412,8 +412,8 @@ register_post_type
             'singular_name' => _x( 'Randimage', 'post-type', 'gogomikemike' )
         ],
         'public' => true,
-        'has_archive' => true,
-        'show_in_rest' => true,
+        'has_archive' => false,
+        'show_in_rest' => false,
         'supports' => [ 'editor', 'title', 'thumbnail' ],
 		'exclude_from_search' => true
     ]
