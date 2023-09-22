@@ -230,6 +230,11 @@
 		}
 	}
 
+	.screen-reader-text
+	{
+		@include screen_reader_text();
+	}
+
 
 
 
@@ -502,6 +507,7 @@
 	{
 		font-size: 2em;
 		border-bottom: 2px solid #000;
+		font-weight: 900;
 	}
 
 	.gomike-post-title
@@ -984,4 +990,16 @@
 	{
 		grid-row-start: 2;
 		grid-row-end: 3;
+	}
+
+	.gomike-home-hero
+	{
+		text-align: center;
+		margin-bottom: 2em;
+
+		svg
+		{
+			max-height: 25vh;
+			width: auto;
+		}
 	}

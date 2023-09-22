@@ -9,7 +9,7 @@
 				'<span class="gomike-jjwm">J. J. W. M</span><span class="gomike-ezun">ezun</span>',
 				'2013',
 				gomike_current_year(),
-				'<i>¡Mega Microstories!</i>',
+				'<i>' . get_bloginfo( 'name' ) . '</i>',
 				'<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>'
 			);
 		?></p>

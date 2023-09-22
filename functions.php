@@ -183,12 +183,14 @@ function gomike_newer_posts_link()
 
 function gomike_group_posts_sequence( $type = 'top' )
 {
-	echo '<nav class="gomike-group-posts-sequence-nav gomike-group-posts-sequence-nav' . $type . '">';
-		echo '<ul class="gomike-group-posts-sequence-list">';
-			gomike_older_posts_link();
-			gomike_newer_posts_link();
-		echo '</ul>';
-	echo '</nav>';
+	?>
+		<nav class="gomike-group-posts-sequence-nav gomike-group-posts-sequence-nav<?= $type; ?>">
+			<ul class="gomike-group-posts-sequence-list">
+				<?php gomike_older_posts_link(); ?>
+				<?php gomike_newer_posts_link(); ?>
+			</ul>
+		</nav>
+	<?php
 }
 
 function gomike_group_posts_sequence_top()
@@ -326,14 +328,14 @@ function gomike_story_list()
 	echo '</ul> <!-- STORY_LIST -->';
 };
 
-function gomike_get_rand_images() : array
+function gomike_get_rand_images( int $n ) : array
 {
 	global $wp_query;
 	return get_posts
 	([
 		'post_type' => 'randimage',
 		'orderby' => 'rand',
-		'numberposts' => $wp_query->found_posts
+		'numberposts' => $n
 	]);
 };
 
@@ -341,7 +343,11 @@ function gomike_render_image( \WP_Post $image ) : void
 {
 	$thumbnailId = get_post_thumbnail_id( $image->ID );
 
-	if ( $thumbnailId === false ) return;
+	// In case thumbnail is invalid, keep trying to get random images till we get valid image.
+	while ( empty( $thumbnailId ) ) {
+		$images = gomike_get_rand_images( 1 );
+		$thumbnailId = !empty( $images ) ? $images[ 0 ] : null;
+	}
 
 	global $gomikeBorderlessOption;
 	$isBorderless = $gomikeBorderlessOption->getValue( $image->ID );

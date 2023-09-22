@@ -1,8 +1,13 @@
+<?php
+    $titleTag = is_single() ? 'h1' : 'h2';
+    $subheaderTag = is_single() ? 'h2' : 'h3';
+?>
+
 <?php gomike_group_posts_sequence_top(); ?>
 
 <?php if ( have_posts() ) : ?>
 
-    <?php $images = gomike_get_rand_images(); ?>
+    <?php $images = gomike_get_rand_images( intval( $wp_query->found_posts ) ); ?>
 
     <?php while ( have_posts() ) : ?>
         <?php the_post(); ?>
@@ -11,11 +16,11 @@
 
             <?php gomike_single_post_sequence_top(); ?>
 
-            <h1 class="gomike-piece-title gomike-post-title<?php if ( is_single() ) { ?> gomike-post-title-single<?php } ?>">
+            <<?= $titleTag; ?> class="gomike-piece-title gomike-post-title<?php if ( is_single() ) { ?> gomike-post-title-single<?php } ?>">
                 <?php if ( !is_single() ) { ?><a href="<?php the_permalink(); ?>"><?php } ?>
                     <?php the_title(); ?>
                 <?php if ( !is_single() ) { ?></a><?php } ?>
-            </h1>
+            </<?= $titleTag; ?>>
             <div class="gomike-post-date"><?php the_time( get_option( 'date_format' ) ); ?></div>
 
             <?= gomike_render_image( array_pop( $images ) ); ?>
@@ -26,7 +31,7 @@
 
             <?php if ( gomike_get_meta( 'prompt' ) ) { ?>
                 <div class="gomike-post-prompt">
-                    <h2 class="gomike-post-subheader gomike-post-subheader-prompt">Prompt:</h2>
+                    <<?= $subheaderTag; ?> class="gomike-post-subheader gomike-post-subheader-prompt">Prompt:</<?= $subheaderTag; ?>>
                         <p><?php gomike_print_meta( 'prompt' ); ?></p>
                 </div> <!-- PROMPT -->
             <?php } ?>
