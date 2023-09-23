@@ -422,6 +422,22 @@ function gomike_favicons() : void
 	<?php
 }
 
+function gomike_exclude_pages_from_search( \WP_Query $query ) : void
+{
+	// Skip if not search or in admin.
+	if
+	(
+		is_admin()
+		|| !$query->is_main_query()
+		|| !$query->is_search
+	)
+	{
+		return;
+	}
+
+	$query->set( 'post_type', 'post' );
+}
+
 add_action( 'wp_enqueue_scripts', 'gomike_remove_block_library' );
 add_action( 'wp_enqueue_scripts', 'gomike_remove_jquery' );
 
@@ -476,3 +492,5 @@ $gomikeBorderlessOption = new WPMetaBox
 );
 
 WPAdminMenuManager::createHeaderMenu();
+
+add_filter( 'pre_get_posts', 'gomike_exclude_pages_from_search' );
