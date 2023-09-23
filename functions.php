@@ -143,10 +143,8 @@ function gomike_single_post_sequence( $type = 'top' )
 	{
 		gomike_print_class( 'gomike-single-post-sequence-nav', $type, 'nav' );
 			gomike_print_class( 'gomike-single-post-sequence-list', $type, 'ul' );
-				gomike_oldest_post_link();
 				gomike_older_post_link();
 				gomike_newer_post_link();
-				gomike_newest_post_link();
 			echo '</ul>';
 		echo '</nav> <!-- POST_SEQUENCE_NAV -->';
 	}
