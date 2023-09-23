@@ -2,7 +2,7 @@
 
 use Mezun\GoGoMikeMike\WPMetaBox;
 use WaughJ\WPAdminMenuManager\WPAdminMenuManager;
-use WaughJ\WPUploadImage\WPUploadImage;
+use Mezun\GoGoMikeMike\WPUploadImage;
 
 require_once( 'vendor/autoload.php' );
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f00282c51e61a88a85d2b254bc4e752",
+    "content-hash": "49c904a92236d3a4a2ede1a7c6346bb6",
     "packages": [
         {
             "name": "psr/http-message",
@@ -271,6 +271,55 @@
             "time": "2019-06-04T19:54:27+00:00"
         },
         {
+            "name": "waughj/flat-to-hierarchy-sorter",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/waughjai/flat-to-hierarchy-sorter.git",
+                "reference": "17f05ebc9997835a3a4bdb0ffc88a33a89789bc8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/waughjai/flat-to-hierarchy-sorter/zipball/17f05ebc9997835a3a4bdb0ffc88a33a89789bc8",
+                "reference": "17f05ebc9997835a3a4bdb0ffc88a33a89789bc8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WaughJ\\FlatToHierarchySorter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jaimeson Waugh",
+                    "email": "waughjai@gmail.com"
+                }
+            ],
+            "description": "Sorts flat list of nodes into hierarchy.",
+            "keywords": [
+                "Organizer",
+                "converter",
+                "hierarchy",
+                "sorter"
+            ],
+            "support": {
+                "issues": "https://github.com/waughjai/flat-to-hierarchy-sorter/issues",
+                "source": "https://github.com/waughjai/flat-to-hierarchy-sorter/tree/v0.1.0"
+            },
+            "time": "2019-10-18T17:48:05+00:00"
+        },
+        {
             "name": "waughj/html-attribute",
             "version": "v1.1.0",
             "source": {
@@ -367,33 +416,31 @@
             "time": "2019-06-03T18:53:38+00:00"
         },
         {
-            "name": "waughj/html-image",
-            "version": "v0.9.3",
+            "name": "waughj/html-link",
+            "version": "v1.2.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/waughjai/html-image.git",
-                "reference": "e2c1643168f7ae7e91837f133f7c693d35b7f71d"
+                "url": "https://github.com/waughjai/html-link.git",
+                "reference": "8faa257ea7455f5cda9ae525e0f0f13dfe60f55b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/waughjai/html-image/zipball/e2c1643168f7ae7e91837f133f7c693d35b7f71d",
-                "reference": "e2c1643168f7ae7e91837f133f7c693d35b7f71d",
+                "url": "https://api.github.com/repos/waughjai/html-link/zipball/8faa257ea7455f5cda9ae525e0f0f13dfe60f55b",
+                "reference": "8faa257ea7455f5cda9ae525e0f0f13dfe60f55b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0",
-                "waughj/file-loader": ">=0.5.4",
-                "waughj/html-attribute-list": ">=1.1.0",
+                "waughj/html-attribute-list": ">=1.0.7",
                 "waughj/test-hash-item": ">=2.0.0"
             },
             "require-dev": {
-                "ngiusti/random-string-generator": "*",
                 "phpunit/phpunit": "*"
             },
-            "type": "library",
+            "type": "project",
             "autoload": {
                 "psr-4": {
-                    "WaughJ\\HTMLImage\\": "src/"
+                    "WaughJ\\HTMLLink\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -406,17 +453,17 @@
                     "email": "waughjai@gmail.com"
                 }
             ],
-            "description": "Simple class for automatically generating image HTML code.",
+            "description": "Simple class for encapsulating link info and autogenerating the HTML for it",
             "keywords": [
-                "autogenerate",
                 "html",
-                "image"
+                "hyperlink",
+                "link"
             ],
             "support": {
-                "issues": "https://github.com/waughjai/html-image/issues",
-                "source": "https://github.com/waughjai/html-image/tree/v0.9.3"
+                "issues": "https://github.com/waughjai/html-link/issues",
+                "source": "https://github.com/waughjai/html-link/tree/master"
             },
-            "time": "2019-06-19T22:48:19+00:00"
+            "time": "2019-06-04T20:39:15+00:00"
         },
         {
             "name": "waughj/test-hash-item",
@@ -565,6 +612,107 @@
             "time": "2018-10-24T17:57:03+00:00"
         },
         {
+            "name": "waughj/wp-admin-menu",
+            "version": "v0.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/waughjai/wp-admin-menu.git",
+                "reference": "37e63c7d0fdfb9c2513db7b352fc724cfc658c39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/waughjai/wp-admin-menu/zipball/37e63c7d0fdfb9c2513db7b352fc724cfc658c39",
+                "reference": "37e63c7d0fdfb9c2513db7b352fc724cfc658c39",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "waughj/flat-to-hierarchy-sorter": "^0.1.0",
+                "waughj/html-attribute-list": "^1.2",
+                "waughj/html-link": ">=1.2.7",
+                "waughj/test-hash-item": ">=2.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WaughJ\\WPAdminMenu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jaimeson Waugh",
+                    "email": "waughjai@gmail.com"
+                }
+            ],
+            "description": "Template for automatically creating link menu based on menu in WordPress's Menu in Appearance.",
+            "keywords": [
+                "admin",
+                "links",
+                "menu",
+                "template",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/waughjai/wp-admin-menu/issues",
+                "source": "https://github.com/waughjai/wp-admin-menu/tree/master"
+            },
+            "time": "2020-03-20T21:25:57+00:00"
+        },
+        {
+            "name": "waughj/wp-admin-menu-manager",
+            "version": "v0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/waughjai/wp-admin-menu-manager.git",
+                "reference": "9e10e804bfdd4395b0865cc8e8dc1e8d78da0898"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/waughjai/wp-admin-menu-manager/zipball/9e10e804bfdd4395b0865cc8e8dc1e8d78da0898",
+                "reference": "9e10e804bfdd4395b0865cc8e8dc1e8d78da0898",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "waughj/wp-admin-menu": "^0.9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WaughJ\\WPAdminMenuManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jaimeson Waugh",
+                    "email": "waughjai@gmail.com"
+                }
+            ],
+            "description": "Singleton manager for making and printing admin menus & making them easily accessible to both WordPress Admin & public website.",
+            "keywords": [
+                "admin",
+                "defaults",
+                "factory",
+                "links",
+                "menu",
+                "template",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/waughjai/wp-admin-menu-manager/issues",
+                "source": "https://github.com/waughjai/wp-admin-menu-manager/tree/v0.6.0"
+            },
+            "time": "2019-12-13T19:38:00+00:00"
+        },
+        {
             "name": "waughj/wp-get-image-sizes",
             "version": "0.1.2",
             "source": {
@@ -612,56 +760,6 @@
                 "source": "https://github.com/waughjai/wp-get-image-sizes/tree/master"
             },
             "time": "2018-12-04T17:13:46+00:00"
-        },
-        {
-            "name": "waughj/wp-upload-image",
-            "version": "v0.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/waughjai/wp-upload-image.git",
-                "reference": "ca9df3292c1a3b8b0d9d72f5f7c4d1a4c30be98b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/waughjai/wp-upload-image/zipball/ca9df3292c1a3b8b0d9d72f5f7c4d1a4c30be98b",
-                "reference": "ca9df3292c1a3b8b0d9d72f5f7c4d1a4c30be98b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "waughj/file-loader": ">=0.5.4",
-                "waughj/html-image": ">=0.9.2",
-                "waughj/wp-get-image-sizes": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "WaughJ\\WPUploadImage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "AGPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Jaimeson Waugh",
-                    "email": "waughjai@gmail.com"
-                }
-            ],
-            "description": "Class for autogenerating HTML for WordPress media image with just the ID.",
-            "keywords": [
-                "media image",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/waughjai/wp-upload-image/issues",
-                "source": "https://github.com/waughjai/wp-upload-image/tree/master"
-            },
-            "time": "2019-06-04T20:13:28+00:00"
         }
     ],
     "packages-dev": [],
