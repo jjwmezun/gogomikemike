@@ -438,6 +438,22 @@ function gomike_exclude_pages_from_search( \WP_Query $query ) : void
 	$query->set( 'post_type', 'post' );
 }
 
+function gomike_get_canonical_url() : string
+{
+	global $wp;
+	$canonical = home_url( $wp->request );
+	if ( !str_ends_with( $canonical, '/' ) )
+	{
+		$canonical .= '/';
+	}
+	if ( is_search() )
+	{
+		$vars = [ 's' => $wp->query_vars[ 's' ] ];
+		$canonical = add_query_arg( $vars, $canonical );
+	}
+	return $canonical;
+}
+
 add_action( 'wp_enqueue_scripts', 'gomike_remove_block_library' );
 add_action( 'wp_enqueue_scripts', 'gomike_remove_jquery' );
 

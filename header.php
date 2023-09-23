@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 	<head>
-		<link rel="canonical" href="<?php echo ( ( is_home() ) ? home_url() : get_permalink( get_the_ID() ) ); ?>">
+		<link rel="canonical" href="<?= gomike_get_canonical_url(); ?>">
 		<?php gomike_favicons(); ?>
 		<?php wp_head(); ?>
 	</head>
