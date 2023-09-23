@@ -8,7 +8,7 @@
 	<body id="gomike-body" <?php gomike_body_class(); ?>>
 		<div>
 			<div class="skip-to-content-link">
-				<a href="#content"><?= __( 'Skip to Content', 'gogomikemike' ); ?>
+				<a href="#content"><?= __( 'Skip to Content', 'gogomikemike' ); ?></a>
 			</div>
 			<header id="gomike-main-header" class="gomike-main-header">
 				<div class="gomike-header-logo">

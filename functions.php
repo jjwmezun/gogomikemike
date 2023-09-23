@@ -1,7 +1,8 @@
 <?php
 
-use WaughJ\WPUploadImage\WPUploadImage;
 use Mezun\GoGoMikeMike\WPMetaBox;
+use WaughJ\WPAdminMenuManager\WPAdminMenuManager;
+use WaughJ\WPUploadImage\WPUploadImage;
 
 require_once( 'vendor/autoload.php' );
 
@@ -237,6 +238,7 @@ function gomike_print_class( $base_class, $specific_class = null, $element = nul
 
 function gomike_main_nav()
 {
+	/*
 	$page_list = get_pages();
 	$link_class = 'gomike-main-nav-list-item';
 
@@ -260,7 +262,30 @@ function gomike_main_nav()
 			}
 
 		echo '</ul>';
-	echo '</nav> <!-- MAIN_NAV -->';
+	echo '</nav> <!-- MAIN_NAV -->';*/
+	$menu = WPAdminMenuManager::getHeaderMenu();
+
+	if ( empty( $menu ) ) return;
+
+	?>
+		<nav class="gomike-main-nav">
+			<ul class="gomike-main-nav-list">
+			<?php
+				$list = $menu->getMenu();
+				foreach ( $list as $item )
+				{
+					?>
+						<li class="gomike-main-nav-list-item">
+							<a class="gomike-main-nav-list-link" href="<?= $item->getUrl(); ?>">
+								<?= $item->getTitle(); ?>
+							</a>
+						</li>
+					<?php
+				}
+			?>
+			</ul>
+		</nav>
+	<?php
 };
 
 function gomike_search()
@@ -449,3 +474,5 @@ $gomikeBorderlessOption = new WPMetaBox
 		'input-type' => 'checkbox'
 	]
 );
+
+WPAdminMenuManager::createHeaderMenu();
