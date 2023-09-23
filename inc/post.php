@@ -1,4 +1,5 @@
 <?php
+	global $wp_query;
     $titleTag = is_single() ? 'h1' : 'h2';
     $subheaderTag = is_single() ? 'h2' : 'h3';
 ?>
@@ -31,7 +32,9 @@
 
             <?php if ( gomike_get_meta( 'prompt' ) ) { ?>
                 <div class="gomike-post-prompt">
-                    <<?= $subheaderTag; ?> class="gomike-post-subheader gomike-post-subheader-prompt">Prompt:</<?= $subheaderTag; ?>>
+                    <<?= $subheaderTag; ?> class="gomike-post-subheader gomike-post-subheader-prompt">
+                        <?= __( 'Prompt:', 'gogomikemike' ); ?>
+                    </<?= $subheaderTag; ?>>
                         <p><?php gomike_print_meta( 'prompt' ); ?></p>
                 </div> <!-- PROMPT -->
             <?php } ?>

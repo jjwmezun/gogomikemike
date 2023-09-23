@@ -330,24 +330,22 @@ function gomike_story_list()
 
 function gomike_get_rand_images( int $n ) : array
 {
-	global $wp_query;
 	return get_posts
 	([
 		'post_type' => 'randimage',
 		'orderby' => 'rand',
-		'numberposts' => $n
+		'numberposts' => $n,
+		'meta_query' => [[ 'key' => '_thumbnail_id' ]] // Only get randimages with thumbnails set.
 	]);
 };
 
-function gomike_render_image( \WP_Post $image ) : void
+function gomike_render_image( ?\WP_Post $image ) : void
 {
+	if ( empty( $image ) ) return;
+
 	$thumbnailId = get_post_thumbnail_id( $image->ID );
 
-	// In case thumbnail is invalid, keep trying to get random images till we get valid image.
-	while ( empty( $thumbnailId ) ) {
-		$images = gomike_get_rand_images( 1 );
-		$thumbnailId = !empty( $images ) ? $images[ 0 ] : null;
-	}
+	if ( empty( $thumbnailId ) ) return;
 
 	global $gomikeBorderlessOption;
 	$isBorderless = $gomikeBorderlessOption->getValue( $image->ID );
