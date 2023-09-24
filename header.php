@@ -2,6 +2,7 @@
 <html <?php language_attributes(); ?>>
 	<head>
 		<link rel="canonical" href="<?= gomike_get_canonical_url(); ?>">
+		<meta charset="utf-8">
 		<?php gomike_favicons(); ?>
 		<?php wp_head(); ?>
 	</head>

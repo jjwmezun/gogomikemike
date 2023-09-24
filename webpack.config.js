@@ -1,4 +1,5 @@
-const path = require('path');
+const path = require( 'path' );
+const TerserPlugin = require( 'terser-webpack-plugin' );
 
 module.exports = {
     mode: 'production',
@@ -18,13 +19,29 @@ module.exports = {
             }
         ]
     },
-    entry: [
-        './assets/js/random-palette.js',
-        './assets/js/sticky-header.js',
-        './assets/js/search.js'
-    ],
+    entry: {
+        index: [
+            './assets/js/random-palette.js',
+            './assets/js/sticky-header.js',
+            './assets/js/search.js'
+        ],
+        archives: './assets/js/archives.js'
+    },
     output: {
-        filename: 'index.js',
+        filename: '[name].js',
         path: path.resolve( __dirname, 'assets/dist' ),
-    }
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [
+          new TerserPlugin({
+            extractComments: false,
+            terserOptions: {
+              format: {
+                comments: false,
+              },
+            },
+          }),
+        ],
+      }
 };
