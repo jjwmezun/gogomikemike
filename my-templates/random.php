@@ -19,7 +19,7 @@
 
     <?php $images = gomike_get_rand_images( 1 ); ?>
 
-    <article <?php gomike_post_class(); ?>>
+    <article class="gomike-post">
 
         <h1 class="gomike-piece-title gomike-post-title">
             <?php the_title(); ?>

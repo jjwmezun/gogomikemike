@@ -6,8 +6,6 @@ use Mezun\GoGoMikeMike\WPUploadImage;
 
 require_once( 'vendor/autoload.php' );
 
-$random_img_list = null;
-
 function gomike_current_year() : string
 {
 	date_default_timezone_set( 'UTC' );
@@ -54,36 +52,13 @@ function gomike_register_archives_js() : void
 	add_action( 'wp_enqueue_scripts', 'gomike_register_archives_script' );
 };
 
-function gomike_body_class()
-{
-	global $post;
-	$class_template = 'gomike-body';
-	$class = $class_template;
-
-	if ( !empty( $post ) )
-	{
-		$class .= ' ' . $class_template . '-' . $post->post_name;
-	}
-
-	if ( is_home() )
-		$class .= ' ' . $class_template . '-home';
-
-	echo 'class="' . $class . '"';
-};
-
-function gomike_post_class()
-{
-	echo 'class="gomike-post"';
-};
-
-function gomike_print_meta( $key, $post_id = null, $single = true )
+function gomike_print_meta( string $key, ?int $post_id = null, bool $single = true ) : void
 {
 	echo gomike_get_meta( $key, $post_id, $single );
 }
 
-function gomike_get_meta( $key, $post_id = null, $single = true )
+function gomike_get_meta( string $key, ?int $post_id = null, bool $single = true ) : string
 {
-
 	if ( !$post_id )
 	{
 		$post_id = get_the_ID();
@@ -92,17 +67,17 @@ function gomike_get_meta( $key, $post_id = null, $single = true )
 	return get_post_meta( $post_id, $key, $single );
 };
 
-function gomike_older_post_link()
+function gomike_older_post_link() : void
 {
 	previous_post_link( gomike_make_class( 'gomike-single-post-sequence-list-item', 'older', 'li' ) . '%link</li>', '&lsaquo; %title' );
 };
 
-function gomike_newer_post_link()
+function gomike_newer_post_link() : void
 {
 	next_post_link( gomike_make_class( 'gomike-single-post-sequence-list-item', 'newer', 'li' ) . '%link</li>', '%title &rsaquo;' );
 };
 
-function gomike_single_post_sequence( $type = 'top' )
+function gomike_single_post_sequence( string $type = 'top' ) : void
 {
 	if ( is_single() )
 	{
@@ -115,17 +90,17 @@ function gomike_single_post_sequence( $type = 'top' )
 	}
 };
 
-function gomike_single_post_sequence_top()
+function gomike_single_post_sequence_top() : void
 {
 	gomike_single_post_sequence( 'top' );
 };
 
-function gomike_single_post_sequence_bottom()
+function gomike_single_post_sequence_bottom() : void
 {
 	gomike_single_post_sequence( 'bottom' );
 };
 
-function gomike_older_posts_link()
+function gomike_older_posts_link() : void
 {
 	if ( get_next_posts_link() )
 	{
@@ -135,7 +110,7 @@ function gomike_older_posts_link()
 	}
 };
 
-function gomike_newer_posts_link()
+function gomike_newer_posts_link() : void
 {
 	if ( get_previous_posts_link() )
 	{
@@ -145,7 +120,7 @@ function gomike_newer_posts_link()
 	}
 };
 
-function gomike_group_posts_sequence( $type = 'top' )
+function gomike_group_posts_sequence( $type = 'top' ) : void
 {
 	?>
 		<nav class="gomike-group-posts-sequence-nav gomike-group-posts-sequence-nav<?= $type; ?>">
@@ -157,17 +132,17 @@ function gomike_group_posts_sequence( $type = 'top' )
 	<?php
 }
 
-function gomike_group_posts_sequence_top()
+function gomike_group_posts_sequence_top() : void
 {
 	gomike_group_posts_sequence( 'top' );
 };
 
-function gomike_group_posts_sequence_bottom()
+function gomike_group_posts_sequence_bottom() : void
 {
 	gomike_group_posts_sequence( 'bottom' );
 };
 
-function gomike_make_class( $base_class, $specific_class = null, $element = null )
+function gomike_make_class( string $base_class, string $specific_class = null, string $element = null ) : string
 {
 	$string = '';
 
@@ -194,64 +169,9 @@ function gomike_make_class( $base_class, $specific_class = null, $element = null
 };
 
 
-function gomike_print_class( $base_class, $specific_class = null, $element = null )
+function gomike_print_class( string $base_class, string $specific_class = null, string $element = null ) : void
 {
 	echo gomike_make_class( $base_class, $specific_class, $element );
-}
-
-function gomike_main_nav()
-{
-	$menu = WPAdminMenuManager::getHeaderMenu();
-
-	if ( empty( $menu ) ) return;
-
-	?>
-		<nav class="gomike-main-nav">
-			<ul class="gomike-main-nav-list">
-			<?php
-				$list = $menu->getMenu();
-				foreach ( $list as $item )
-				{
-					?>
-						<li class="gomike-main-nav-list-item">
-							<a class="gomike-main-nav-list-link" href="<?= $item->getUrl(); ?>">
-								<?= $item->getTitle(); ?>
-							</a>
-						</li>
-					<?php
-				}
-			?>
-			</ul>
-		</nav>
-	<?php
-};
-
-function gomike_search()
-{
-	?>
-	<!-- SEARCH -->
-		<div class="gomike-search">
-			<form method="get" id="searchform" action="/">
-				<div id="gomike-search-input" class="gomike-search-input">
-					<textarea
-						name="s"
-						class="gomike-search-bar"
-						id="gomike-search-bar"
-						placeholder="<?= __( 'Search', 'gogomikemike' ); ?>"
-					></textarea>
-				</div>
-				<div class="gomike-search-submit">
-					<input
-						type="submit"
-						value="<?= __( 'Search', 'gogomikemike' ); ?>"
-						class="gomike-search-submit-input"
-					/>
-					<?php include( 'assets/dist/search.svg' ); ?>
-				</div>
-			</form>
-		</div>
-	<!-- SEARCH -->
-	<?php
 };
 
 function gomike_main_content_class()
@@ -331,21 +251,6 @@ function gomike_remove_jquery() : void
 	wp_deregister_script( 'jquery' );
 }
 
-function gomike_favicons() : void
-{
-	?>
-		<link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/gogomikemike/assets/dist/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/gogomikemike/assets/dist/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/gogomikemike/assets/dist/favicon-16x16.png">
-		<link rel="manifest" href="/wp-content/themes/gogomikemike/assets/dist/site.webmanifest">
-		<link rel="mask-icon" href="/wp-content/themes/gogomikemike/assets/dist/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="/wp-content/themes/gogomikemike/assets/dist/favicon.ico">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="msapplication-config" content="/wp-content/themes/gogomikemike/assets/dist/browserconfig.xml">
-		<meta name="theme-color" content="#ffffff">
-	<?php
-}
-
 function gomike_exclude_pages_from_search( \WP_Query $query ) : void
 {
 	// Skip if not search or in admin.
@@ -378,6 +283,7 @@ function gomike_get_canonical_url() : string
 	return $canonical;
 }
 
+// Remove default JS.
 add_action( 'wp_enqueue_scripts', 'gomike_remove_block_library' );
 add_action( 'wp_enqueue_scripts', 'gomike_remove_jquery' );
 
@@ -389,6 +295,7 @@ add_theme_support( 'title-tag' );
 
 add_filter( 'big_image_size_threshold', '__return_false' );
 
+// Register main CSS & JS.
 gomike_register_main_css();
 gomike_register_main_js();
 
@@ -431,6 +338,8 @@ $gomikeBorderlessOption = new WPMetaBox
 	]
 );
 
+// Create header menu.
 WPAdminMenuManager::createHeaderMenu();
 
+// Exclude pages from search.
 add_filter( 'pre_get_posts', 'gomike_exclude_pages_from_search' );

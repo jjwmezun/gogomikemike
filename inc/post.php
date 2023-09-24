@@ -13,7 +13,7 @@
     <?php while ( have_posts() ) : ?>
         <?php the_post(); ?>
 
-        <article <?php gomike_post_class(); ?>>
+        <article class="gomike-post">
 
             <?php gomike_single_post_sequence_top(); ?>
 
