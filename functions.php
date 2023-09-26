@@ -14,13 +14,13 @@ function gomike_current_year() : string
 
 function gomike_register_main_style() : void
 {
-	wp_register_style( 'main_css', get_template_directory_uri() . '/assets/dist/index.css' );
+	wp_register_style( 'main_css', get_template_directory_uri() . '/assets/dist/index.css', [], '2.0.0' );
 	wp_enqueue_style( 'main_css' );
 };
 
 function gomike_register_admin_style() : void
 {
-	wp_register_style( 'admin_css', get_template_directory_uri() . '/assets/dist/admin.css' );
+	wp_register_style( 'admin_css', get_template_directory_uri() . '/assets/dist/admin.css', [], '2.0.0' );
 	wp_enqueue_style( 'admin_css' );
 }
 
@@ -32,13 +32,13 @@ function gomike_register_main_css() : void
 
 function gomike_register_main_script() : void
 {
-	wp_register_script( 'main', get_template_directory_uri() . '/assets/dist/index.js', [], '0.1.2', [ 'strategy' => 'defer' ] );
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/dist/index.js', [], '2.0.0', [ 'strategy' => 'defer' ] );
 	wp_enqueue_script( 'main' );
 };
 
 function gomike_register_archives_script() : void
 {
-	wp_register_script( 'archives', get_template_directory_uri() . '/assets/dist/archives.js', [], '0.1.2', [ 'strategy' => 'defer' ] );
+	wp_register_script( 'archives', get_template_directory_uri() . '/assets/dist/archives.js', [], '2.0.0', [ 'strategy' => 'defer' ] );
 	wp_enqueue_script( 'archives' );
 };
 
