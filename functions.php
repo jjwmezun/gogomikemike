@@ -283,6 +283,11 @@ function gomike_get_canonical_url() : string
 	return $canonical;
 }
 
+function gomike_get_image_editors( array $editors ) : array
+{
+	return [ 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' ];
+};
+
 // Remove default JS.
 add_action( 'wp_enqueue_scripts', 'gomike_remove_block_library' );
 add_action( 'wp_enqueue_scripts', 'gomike_remove_jquery' );
@@ -343,3 +348,9 @@ WPAdminMenuManager::createHeaderMenu();
 
 // Exclude pages from search.
 add_filter( 'pre_get_posts', 'gomike_exclude_pages_from_search' );
+
+// Remove big image threshold.
+add_filter( 'big_image_size_threshold', '__return_false' );
+
+// Change image editor to mo’ efficient program.
+add_filter( 'wp_image_editors', 'gomike_get_image_editors' );
